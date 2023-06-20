@@ -1,0 +1,36 @@
+.section{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.section .row{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.section .row .col{
+    min-width: 22px;
+    min-height: 22px;
+    margin: 1px;
+    background-color: #d2d3fb;
+}
+.section .row .col:hover, .section .row .col.ampole-selected{
+    background-color: #5c61f2;
+}
+
+.section .row .col.ampole-selected2{
+    background-color: #eeb82f;
+}
+.section .row .col.ampole-selected3{
+	background-color: #247164;
+}
+.section .row .col.ampole-selected4{
+	background-color: #7F563A;
+}
+.section .row .col.ampole-selected5{
+	background-color: #171829;
+}

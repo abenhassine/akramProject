@@ -1,0 +1,247 @@
+<%- include("elements/header.ejs"); %>
+<style>
+    td {
+        cursor: pointer;
+    }
+
+    .selected {
+        background-color: yellow;
+    }
+</style>
+
+<!-- Page Header Ends-->
+<!-- Page Body Start-->
+<div class="page-body-wrapper">
+    <!-- start sidebar -->
+    <%- include("elements/leftbar.ejs"); %>
+    <!-- end sidebar -->
+    <div class="page-body">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>Planification des zones</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                            <li class="breadcrumb-item">Gestion</li>
+                            <li class="breadcrumb-item active">Etages</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-success outline-2x" id="alert-success" role="alert">
+            <p>Données enregistrées avec succès!</p>
+        </div>
+        <form id="planificationFormulaire">
+            <div class="col-sm-12 col-xl-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h4><i class="fa fa-calendar"></i> Planification par type de zone</h4>
+                        <span><code>Planifier les jours de la semaine</code></span>
+                    </div>
+                    <div class="card-body">
+                        <select id="typeSelect" class="form-select"></select>
+                        <ul class="nav nav-tabs border-tab nav-primary" id="info-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="info-lundi-tab" data-bs-toggle="tab"
+                                    href="#info-lundi" role="tab" aria-controls="info-lundi"
+                                    aria-selected="true"><i class="fa fa-calendar-o"></i>Lundi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="info-mardi-tab" data-bs-toggle="tab" href="#info-mardi"
+                                    role="tab" aria-controls="info-mardi" aria-selected="true"><i
+                                        class="fa fa-calendar-o"></i>Mardi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="info-mercredi-tab" data-bs-toggle="tab"
+                                    href="#info-mercredi" role="tab" aria-controls="info-mercredi"
+                                    aria-selected="true"><i class="fa fa-calendar-o"></i>Mercredi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="info-jeudi-tab" data-bs-toggle="tab" href="#info-jeudi"
+                                    role="tab" aria-controls="info-jeudi" aria-selected="true"><i
+                                        class="fa fa-calendar-o"></i>Jeudi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="info-vendredi-tab" data-bs-toggle="tab"
+                                    href="#info-vendredi" role="tab" aria-controls="info-vendredi"
+                                    aria-selected="true"><i class="fa fa-calendar-o"></i>Vendredi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="info-samedi-tab" data-bs-toggle="tab" href="#info-samedi"
+                                    role="tab" aria-controls="info-samedi" aria-selected="true"><i
+                                        class="fa fa-calendar-o"></i>Samedi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " id="info-dimanche-tab" data-bs-toggle="tab"
+                                    href="#info-dimanche" role="tab" aria-controls="info-dimanche"
+                                    aria-selected="true"><i class="fa fa-calendar-o"></i>Dimanche</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="info-tabContent">
+                            <div class="tab-pane fade show active" id="info-lundi" role="tabpanel"
+                                aria-labelledby="info-lundi-tab">
+                                <p class="mb-0">
+                                    <div class="form-group mt-3">
+                                        <label>Plages horaires:</label>
+                                        <div id="plages-horaires-lundi">
+                                            <div class="plage-horaire">
+                                                <input type="time" class="form-control" name="start-time-lundi[]"
+                                                    placeholder="Heure de début">
+                                                <input type="time" class="form-control" name="end-time-lundi[]"
+                                                    placeholder="Heure de fin">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2"
+                                            onclick="ajouterPlageHoraire('lundi')">Ajouter</button>
+                                    </div>
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="info-mardi" role="tabpanel"
+                                aria-labelledby="info-mardi-tab">
+                                <p class="mb-0">
+                                    <div class="form-group mt-3">
+                                        <label>Plages horaires:</label>
+                                        <div id="plages-horaires-mardi">
+                                            <div class="plage-horaire">
+                                                <input type="time" class="form-control" name="start-time-mardi[]"
+                                                    placeholder="Heure de début">
+                                                <input type="time" class="form-control" name="end-time-mardi[]"
+                                                    placeholder="Heure de fin">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2"
+                                            onclick="ajouterPlageHoraire('mardi')">Ajouter</button>
+                                    </div>
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="info-mercredi" role="tabpanel"
+                                aria-labelledby="info-mercredi-tab">
+                                <p class="mb-0">
+                                    <div class="form-group mt-3">
+                                        <label>Plages horaires:</label>
+                                        <div id="plages-horaires-mercredi">
+                                            <div class="plage-horaire">
+                                                <input type="time" class="form-control"
+                                                    name="start-time-mercredi[]" placeholder="Heure de début">
+                                                <input type="time" class="form-control"
+                                                    name="end-time-mercredi[]" placeholder="Heure de fin">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2"
+                                            onclick="ajouterPlageHoraire('mercredi')">Ajouter</button>
+                                    </div>
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="info-jeudi" role="tabpanel"
+                                aria-labelledby="info-jeudi-tab">
+                                <p class="mb-0">
+                                    <div class="form-group mt-3">
+                                        <label>Plages horaires:</label>
+                                        <div id="plages-horaires-jeudi">
+                                            <div class="plage-horaire">
+                                                <input type="time" class="form-control" name="start-time-jeudi[]"
+                                                    placeholder="Heure de début">
+                                                <input type="time" class="form-control" name="end-time-jeudi[]"
+                                                    placeholder="Heure de fin">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2"
+                                            onclick="ajouterPlageHoraire('jeudi')">Ajouter</button>
+                                    </div>
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="info-vendredi" role="tabpanel"
+                                aria-labelledby="info-vendredi-tab">
+                                <p class="mb-0">
+                                    <div class="form-group mt-3">
+                                        <label>Plages horaires:</label>
+                                        <div id="plages-horaires-vendredi">
+                                            <div class="plage-horaire">
+                                                <input type="time" class="form-control"
+                                                    name="start-time-vendredi[]" placeholder="Heure de début">
+                                                <input type="time" class="form-control"
+                                                    name="end-time-vendredi[]" placeholder="Heure de fin">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2"
+                                            onclick="ajouterPlageHoraire('vendredi')">Ajouter</button>
+                                    </div>
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="info-samedi" role="tabpanel"
+                                aria-labelledby="info-samedi-tab">
+                                <p class="mb-0">
+                                    <div class="form-group mt-3">
+                                        <label>Plages horaires:</label>
+                                        <div id="plages-horaires-samedi">
+                                            <div class="plage-horaire">
+                                                <input type="time" class="form-control" name="start-time-samedi[]"
+                                                    placeholder="Heure de début">
+                                                <input type="time" class="form-control" name="end-time-samedi[]"
+                                                    placeholder="Heure de fin">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2"
+                                            onclick="ajouterPlageHoraire('samedi')">Ajouter</button>
+                                    </div>
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="info-dimanche" role="tabpanel"
+                                aria-labelledby="info-dimanche-tab">
+                                <p class="mb-0">
+                                    <div class="form-group mt-3">
+                                        <label>Plages horaires:</label>
+                                        <div id="plages-horaires-dimanche">
+                                            <div class="plage-horaire">
+                                                <input type="time" class="form-control"
+                                                    name="start-time-dimanche[]" placeholder="Heure de début">
+                                                <input type="time" class="form-control"
+                                                    name="end-time-dimanche[]" placeholder="Heure de fin">
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mt-2"
+                                            onclick="ajouterPlageHoraire('dimanche')">Ajouter</button>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-4">Enregistrer</button>
+                        <div class="spinner-border Typeahead-spinner" id="loading" role="status"><span class="sr-only">Loading...</span></div><i class="close-search" data-feather="x"></i>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include("elements/footer.ejs"); %>
+
+<!-- Page Body Ends-->
+<script>
+     var plagesHoraires = {
+        lundi: 1,
+        mardi: 2,
+        mercredi: 3,
+        jeudi: 4,
+        vendredi: 5,
+        samedi: 6,
+        dimanche: 7
+    };
+
+    function ajouterPlageHoraire(jour) {
+        var container = document.getElementById('plages-horaires-' + jour);
+        var plageHoraire = document.createElement('div');
+        plageHoraire.className = 'plage-horaire';
+        plageHoraire.innerHTML = `
+            <input type="time" class="form-control" name="start-time-${jour}[]" placeholder="Heure de début">
+            <input type="time" class="form-control" name="end-time-${jour}[]" placeholder="Heure de fin">
+        `;
+        container.appendChild(plageHoraire);
+    }
+
+</script>
+<script src="/js/calendarPlanificationType.js"></script>
